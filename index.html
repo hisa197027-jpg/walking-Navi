@@ -2,17 +2,33 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ウォーキング・ナビ</title>
 </head>
 <body style="text-align:center; padding:20px; font-family:sans-serif;">
+
     <h1>ウォーキング・ナビ</h1>
-    <div style="background:#ddd; height:200px; display:flex; align-items:center; justify-content:center;">
-        地図エリア
+    
+    <div style="background:#ddd; padding:20px; margin-bottom:20px;">
+        <p id="steps">歩数: 読み込み中...</p>
+        <p id="distance">距離: 0.00 km</p>
     </div>
-    <div style="margin:20px; padding:20px; border:1px solid #ccc;">
-        <p>歩数: 0歩</p>
-        <button onclick="window.location.href='https://maps.google.com'">地図アプリを開く</button>
+
+    <div style="border:1px solid #ccc; padding:20px;">
+        <button onclick="window.open('https://maps.google.com', '_blank')" style="padding:10px; margin:5px;">地図を開く</button>
+        <button onclick="window.open('https://music.youtube.com', '_blank')" style="padding:10px; margin:5px;">音楽を聴く</button>
     </div>
+
+    <script>
+        // 歩数と距離のシミュレーション（本来はセンサーAPIが必要ですが、まずは土台として作成）
+        let stepCount = 0;
+        function updateWalkingData() {
+            stepCount += Math.floor(Math.random() * 5); // デモ用：自動で増える
+            let distance = (stepCount * 0.0007).toFixed(2); // 1歩約70cmで計算
+            document.getElementById('steps').innerText = '歩数: ' + stepCount + '歩';
+            document.getElementById('distance').innerText = '距離: ' + distance + ' km';
+        }
+        setInterval(updateWalkingData, 2000);
+    </script>
 </body>
 </html>
-
